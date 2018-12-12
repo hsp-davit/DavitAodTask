@@ -5,7 +5,6 @@ import java.time.Month;
 
 import aodspace.ood.staff.base.Member;
 import aodspace.ood.staff.base.MemberType;
-import aodspace.ood.util.MathUtil;
 
 /**
  * class for testing
@@ -38,7 +37,7 @@ public class CompanyDemo {
 	 */
 	private static void printMemberWhitSalary(LocalDate payDay) {
 		for (Member member : company.getMembers()) {
-			double salary = MathUtil.round(member.calculateSalary(payDay));
+			double salary = Math.round(member.calculateSalary(payDay));
 
 			System.out.println("Member: " + member.getName() + " Salary: " + salary);
 		}

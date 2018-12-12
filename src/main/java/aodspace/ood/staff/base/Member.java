@@ -1,12 +1,11 @@
 package aodspace.ood.staff.base;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 import aodspace.ood.exception.IncorrectMemberException;
-import aodspace.ood.util.DateUtil;
-import aodspace.ood.util.MathUtil;
 
 /**
  * class which contains informations about Member's details
@@ -17,6 +16,7 @@ import aodspace.ood.util.MathUtil;
 public abstract class Member {
 
 	private static final double DEFAULT_SALARY = 100000;
+	private static final int DIVISOR = 100;
 
 	protected int annualSalaryWithPercent;
 	protected int maximumSalaryPercentage;
@@ -42,11 +42,11 @@ public abstract class Member {
 	 * @return
 	 */
 	public Double calculateSalary(LocalDate payDay) {
-		int yearsOfWork = DateUtil.getYearsDifference(joinDate, payDay);
+		int yearsOfWork = getYearsDifference(joinDate, payDay);
 
 		Double dailySalary = DEFAULT_SALARY;
 		for (int i = 0; i < yearsOfWork; i++) {
-			Double salaryUp = dailySalary + MathUtil.calculatePercent(dailySalary, annualSalaryWithPercent);
+			Double salaryUp = dailySalary + calculatePercent(dailySalary, annualSalaryWithPercent);
 			if (isMaximumSalary(salaryUp)) {
 				return getMaxSalary();
 			}
@@ -72,7 +72,7 @@ public abstract class Member {
 	 * @return
 	 */
 	private Double getMaxSalary() {
-		return DEFAULT_SALARY + MathUtil.calculatePercent(DEFAULT_SALARY, maximumSalaryPercentage);
+		return DEFAULT_SALARY + calculatePercent(DEFAULT_SALARY, maximumSalaryPercentage);
 	}
 
 	/**
@@ -116,6 +116,28 @@ public abstract class Member {
 		if (supervisor == null || supervisor.getName().equalsIgnoreCase("Employee")) {
 			throw new IncorrectMemberException("Member can't be supervisor");
 		}
+	}
+	
+	/**
+	 * calculate percent
+	 * 
+	 * @param number
+	 * @param percent
+	 * @return
+	 */
+	public static double calculatePercent(double number, double percent) {
+		return number * percent / DIVISOR;
+	}
+	
+	/**
+	 * get difference between two years
+	 * 
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public static int getYearsDifference(LocalDate from, LocalDate to) {
+		return Period.between(from, to).getYears();
 	}
 
 	/*

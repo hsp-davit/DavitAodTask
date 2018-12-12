@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import aodspace.ood.staff.base.Member;
 import aodspace.ood.staff.base.MemberType;
-import aodspace.ood.util.MathUtil;
 
 /**
  * initialize percent of manager
@@ -36,7 +35,7 @@ public class Manager extends Member {
 		Double salary = super.calculateSalary(payDay);
 
 		for (Member subordinate : subordinates) {
-			salary += MathUtil.calculatePercent(subordinate.calculateSalary(payDay), subordinatesWithPercent);
+			salary += calculatePercent(subordinate.calculateSalary(payDay), subordinatesWithPercent);
 		}
 
 		return salary;
