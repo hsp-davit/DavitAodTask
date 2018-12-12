@@ -16,6 +16,7 @@ public class CompanyDemo {
 	static Company company = new Company();
 
 	public static void main(String[] args) {
+		
 
 		Member employee = company.addMember("Employee", LocalDate.of(2017, Month.JULY, 29), MemberType.EMPLOYEE);
 		Member manager = company.addMember("Manager", LocalDate.of(2017, Month.JULY, 29), MemberType.MANAGER);
@@ -23,6 +24,7 @@ public class CompanyDemo {
 
 		employee.initSupervisor(manager);
 		employee.initSupervisor(sales);
+		sales.initSupervisor(manager);
 
 		LocalDate payDay = LocalDate.now();
 		printMemberWhitSalary(payDay);
