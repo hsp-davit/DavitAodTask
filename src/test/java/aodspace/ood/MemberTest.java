@@ -21,7 +21,7 @@ public class MemberTest {
 
 	@Test
 	public void testEmployeeSalary() {
-		Member employee1 = initMember("Employee", LocalDate.of(2017, Month.JULY, 29), MemberType.EMPLOYEE);
+		Member employee1 = initMember("Employee", LocalDate.of(2018, Month.JULY, 29), MemberType.EMPLOYEE);
 
 		double salary = Math.round(employee1.calculateSalary(LocalDate.now()));
 		assertEquals(103000, salary, 0);
@@ -34,7 +34,7 @@ public class MemberTest {
 
 	@Test
 	public void testManagerSalary() {
-		Member manager1 = initMember("Manager", LocalDate.of(2017, Month.JULY, 29), MemberType.MANAGER);
+		Member manager1 = initMember("Manager", LocalDate.of(2018, Month.JULY, 29), MemberType.MANAGER);
 		double salary = Math.round(manager1.calculateSalary(LocalDate.now()));
 
 		assertEquals(105000, salary, 0);
@@ -44,7 +44,7 @@ public class MemberTest {
 
 		assertEquals(140000, salary, 0);
 
-		Member employee1 = initMember("Manager2Subordinate", LocalDate.of(2017, Month.JULY, 29), MemberType.EMPLOYEE);
+		Member employee1 = initMember("Manager2Subordinate", LocalDate.of(2018, Month.JULY, 29), MemberType.EMPLOYEE);
 		employee1.initSupervisor(manager2);
 
 		salary = Math.round(manager2.calculateSalary(LocalDate.now()));
@@ -54,7 +54,7 @@ public class MemberTest {
 
 	@Test
 	public void testSalesSalary() {
-		Member sales1 = initMember("Sales", LocalDate.of(2017, Month.JULY, 29), MemberType.SALES);
+		Member sales1 = initMember("Sales", LocalDate.of(2018, Month.JULY, 29), MemberType.SALES);
 		double salary = Math.round(sales1.calculateSalary(LocalDate.now()));
 
 		assertEquals(101000, salary, 0);
@@ -64,7 +64,7 @@ public class MemberTest {
 
 		assertEquals(135000, salary, 0);
 
-		Member manager = initMember("Sales2Subordinate", LocalDate.of(2017, Month.JULY, 29), MemberType.MANAGER);
+		Member manager = initMember("Sales2Subordinate", LocalDate.of(2018, Month.JULY, 29), MemberType.MANAGER);
 		manager.initSupervisor(sales2);
 
 		salary = Math.round(sales2.calculateSalary(LocalDate.now()));
